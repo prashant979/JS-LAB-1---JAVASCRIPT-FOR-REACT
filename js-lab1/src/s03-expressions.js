@@ -19,8 +19,6 @@ export function descriptionOrDefault(course) {
 
 // "3 in planner" for a positive count, and null (not 0, not "") for zero.
 export function plannerBadge(count) {
-  if (count > 0) {
-    return `${count} in planner`;
-  }
-  return null;  
+  return count > 0 ? `${count} in planner` : null;
+  
 }
