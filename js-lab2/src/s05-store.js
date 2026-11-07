@@ -74,7 +74,7 @@ export function transition(state, event) {
         return state;
       }
 
-      if (course.enrolled >= course.capacity) {
+      if (course.seatsLeft === 0) {
         return state;
       }
 
@@ -84,16 +84,17 @@ export function transition(state, event) {
         return state;
       }
 
-      const newCourse = {
-        id: course.id,
-        code: course.code,
-        title: course.title,
-        credits: course.credits
-      };
-
       return {
         ...state,
-        planner: [...state.planner, newCourse]
+        planner: [
+          ...state.planner,
+          {
+            id: course.id,
+            code: course.code,
+            title: course.title,
+            credits: course.credits
+          }
+        ]
       };
 
     case "REMOVE":
