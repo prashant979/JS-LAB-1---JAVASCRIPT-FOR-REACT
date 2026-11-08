@@ -100,16 +100,31 @@ export function courseCards(courses, department) {
 
 // Planner ids → the course objects, in planner order. Unknown ids are skipped.
 export function plannerCourses(planner, courses) {
-  throw new Error("TODO");
+  return planner
+    .map((id) => courses.find((course) => course.id === id))
+    .filter((course) => course !== undefined);
 }
 
 // Total credits of the planned courses.
 export function plannerCredits(planner, courses) {
-  throw new Error("TODO");
+  return plannerCourses(planner, courses)
+    .reduce((total, course) => total + course.credits, 0);
 }
 
 // Can this course be added? It must exist, have a seat, not already be in
 // the planner, and keep the total within the limit (24 by default).
 export function canAdd(planner, courses, courseId, limit = 24) {
-  throw new Error("TODO");
+  const course = courses.find((c) => c.id === courseId);
+
+  if (!course) return false;
+
+  if (course.seatsLeft <= 0) return false;
+
+  if (planner.includes(courseId)) return false;
+
+  if (plannerCredits(planner, courses) + course.credits > limit) {
+    return false;
+  }
+
+  return true;
 }
