@@ -11,8 +11,12 @@ export default function App() {
   //             <Matrix matrix={…} /> under the header.
 
   const [matrix, setMatrix] = useState(START);
+  
   // Section 08: write increment(row, col): it calls the setter with incrementAt.
   //             Pass it down to Matrix as onIncrement.
+  function increment(row, col) {
+    setMatrix(incrementAt(matrix, row, col));
+  }
 
 
   // Section 09: render <Stats matrix={…} /> NEXT TO the matrix, not inside it.
@@ -20,7 +24,7 @@ export default function App() {
   return (
     <main className="app">
       <Header />
-      <Matrix matrix={matrix}></Matrix>
+      <Matrix matrix={matrix} onIncrement={increment}></Matrix>
     </main>
   );
 }
