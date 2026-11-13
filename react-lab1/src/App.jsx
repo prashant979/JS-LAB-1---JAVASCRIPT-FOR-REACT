@@ -24,7 +24,8 @@ export default function App() {
   return (
     <main className="app">
       <Header />
-      <Matrix matrix={matrix} onIncrement={increment}></Matrix>
+      <Matrix matrix={matrix} onIncrement={increment} ></Matrix>
+      <Stats matrix={matrix}></Stats>
     </main>
   );
 }
